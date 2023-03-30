@@ -1,13 +1,26 @@
 import Filler from '../Components/Filler'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Form from 'react-bootstrap/Form';
-import InputGroup from 'react-bootstrap/InputGroup';
-import Button from 'react-bootstrap/Button';
+import {Container, Row, Form, InputGroup, Button} from 'react-bootstrap';
+import {useRef} from "react";
 import logo from '../trivia-logo.svg';
 
-const HomePage = () => {
+function HomePage(props){
+    const nameRef = useRef();
+
+    const handleClick = () => {
+        if (nameRef.current.value.trim() !== ''){
+            if (localStorage.getItem(nameRef.current.value.trim()) !== null){ // existing player
+                alert('Please take a break~');
+            } else { // new player
+                localStorage.setItem(nameRef.current.value.trim(), []);
+                props.setGameState('question');
+            }
+        } else {
+            alert('Please enter your name');
+        }
+        
+    }
+
     return (
     <div className='background'>
     <Filler/>
@@ -31,13 +44,14 @@ const HomePage = () => {
                         placeholder="Name"
                         aria-label="Name"
                         aria-describedby="basic-addon1"
+                        ref={nameRef}
                         />
                     </InputGroup>
                 </div>
             </Row>
             <Row>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <Button variant="danger">Gooo !</Button>
+                    <Button variant="danger" onClick={handleClick}>Gooo!</Button>
                 </div>
             </Row>
             <Row>
