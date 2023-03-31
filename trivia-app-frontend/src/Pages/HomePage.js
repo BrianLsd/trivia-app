@@ -1,22 +1,42 @@
 import Filler from '../Components/Filler'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Row, Form, InputGroup, Button} from 'react-bootstrap';
+import {Container, Row, Form, InputGroup, Button, Alert} from 'react-bootstrap';
 import {useRef} from "react";
+import {useState} from "react";
 import logo from '../trivia-logo.svg';
 
 function HomePage(props){
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
     const nameRef = useRef();
 
     const handleClick = () => {
-        if (nameRef.current.value.trim() !== ''){
-            if (localStorage.getItem(nameRef.current.value.trim()) !== null){ // existing player
-                alert('Please take a break~');
+        let playerName = nameRef.current.value.trim();
+        if (playerName !== ''){
+            if (localStorage.getItem(playerName) !== null){ // existing player
+                const storedMapString = localStorage.getItem(playerName);
+                const storedMap = new Map(Object.entries(JSON.parse(storedMapString)));
+                if ((new Date() - new Date(storedMap.get("lastPlayed"))) / (1000 * 60 * 60 * 24) >= 1) {
+                    // able to play
+                    storedMap.set("lastPlayed", new Date()) // update the login time
+                    const mapObject = Object.fromEntries(storedMap.entries());
+                    localStorage.setItem(playerName, JSON.stringify(mapObject));
+                    props.setGameState('question');
+                } else {
+                    // unable to play
+                    setShowAlert(true);
+                    setAlertMessage('You can only play once a day');
+                }
             } else { // new player
-                localStorage.setItem(nameRef.current.value.trim(), []);
+                const mapTobeStored = new Map();
+                mapTobeStored.set("lastPlayed", new Date());
+                const mapObject = Object.fromEntries(mapTobeStored.entries());
+                localStorage.setItem(playerName, JSON.stringify(mapObject));
                 props.setGameState('question');
             }
         } else {
-            alert('Please enter your name');
+            setShowAlert(true);
+            setAlertMessage('You must enter your name to play');
         }
         
     }
@@ -50,9 +70,17 @@ function HomePage(props){
                 </div>
             </Row>
             <Row>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div style={{ display: "flex", justifyContent: "center", paddingBottom: "20px"}}>
                     <Button variant="danger" onClick={handleClick}>Gooo!</Button>
                 </div>
+            </Row>
+            <Row>
+                {showAlert && <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                <Alert.Heading>Oops!</Alert.Heading>
+                <p>
+                    {alertMessage}
+                </p>
+                </Alert>}
             </Row>
             <Row>
                 <div>
