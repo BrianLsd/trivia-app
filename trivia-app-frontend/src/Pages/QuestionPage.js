@@ -1,8 +1,14 @@
 import Filler from '../Components/Filler'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useEffect, useState } from 'react';
 import {Container, Row, Button} from 'react-bootstrap';
 
 function QuestionPage (props) {
+    const [question, setQuestion] = useState('');
+    useEffect(() => {
+        // retrieve the first question
+    }, [])
+
     const handleClick = () => {
 
     }

@@ -49,7 +49,7 @@ function HomePage(props){
                 <h1 className="text-center">Welcome to Pure Trivia</h1>
             </Row>
             <Row>
-                <h3 className="text-center">Let's see how many questions you can get right!</h3>
+                <h3 className="text-center">"Let's see how many questions you can get right!"</h3>
             </Row>
             <Row>
                 <div style={{ display: "flex", justifyContent: "center" }}>

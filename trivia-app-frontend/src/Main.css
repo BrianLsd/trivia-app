@@ -31,10 +31,17 @@
 h1 {
   font-size: 2rem;
   font-style: italic;
+  background-image: linear-gradient(to left, red, orange, green, blue, violet);
+  -webkit-background-clip: text;
+  color: transparent;
+  padding-top: 25px;
 }
 
 h3 {
   font-size: 1.5rem;
+  background-image: linear-gradient(to right, red, orange, green, blue, red);
+  -webkit-background-clip: text;
+  color: transparent;
 }
 
 h6 {
