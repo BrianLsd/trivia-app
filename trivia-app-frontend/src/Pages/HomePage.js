@@ -46,7 +46,7 @@ function HomePage(props){
     <Filler/>
         <Container style={{justifyContent: "center"}}>
             <Row>
-                <h1 className="text-center">Welcome to Pure Trivia</h1>
+                <h1 className="text-center rainbow">Welcome to Pure Trivia</h1>
             </Row>
             <Row>
                 <h3 className="text-center">"Let's see how many questions you can get right!"</h3>
