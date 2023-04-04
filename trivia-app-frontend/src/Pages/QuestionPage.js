@@ -1,9 +1,11 @@
 import Filler from '../Components/Filler'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext} from 'react';
 import {Container, Row, Button} from 'react-bootstrap';
+import {TriviaContext} from '../Components/Contexts';
 
-function QuestionPage (props) {
+function QuestionPage () {
+    const {setGameState, currentPlayerName} = useContext(TriviaContext);
     const [questions, setQuestions] = useState('');
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const [optionChosen, setOptionChosen] = useState('');
@@ -21,12 +23,44 @@ function QuestionPage (props) {
 
     const handleClick = () => {
         if (currentQuestion === questions.data.length - 1) {
-            props.setGameState('result');
+            // process user stats here -> store score, calcuate average, 
+            // how many times played, and number of 10/10
+            const storedMapString = localStorage.getItem(currentPlayerName);
+            const storedMap = new Map(Object.entries(JSON.parse(storedMapString)));
+            storedMap.set("lastest score", score);
+            if (storedMap.has("times played")) {
+                storedMap.set("times played", storedMap.get("times played") + 1);
+            } else {
+                storedMap.set("times played", 1);
+            }
+
+            if (storedMap.has("total score")){
+                storedMap.set("total score", storedMap.get("total score") + score);
+            } else {
+                storedMap.set("total score", score);
+            }
+
+            if (storedMap.has("times of 10/10")){
+                if (score === 10) {
+                    storedMap.set("times of 10/10", storedMap.get("times of 10/10") + 1);
+                }
+            } else {
+                if (score === 10) {
+                    storedMap.set("times of 10/10", 1);
+                } else {
+                    storedMap.set("times of 10/10", 0);
+                }
+            }
+
+            localStorage.setItem(currentPlayerName, JSON.stringify(Object.fromEntries(storedMap)));
+            setGameState('result');
         } else {
             if (optionChosen === questions.data[currentQuestion].answer){
                 setCurrentQuestion(currentQuestion + 1);
+                setScore(score + 1);
             }
             setCurrentQuestion(currentQuestion + 1);
+            setOptionChosen('');
         }
     }
 
@@ -35,27 +69,38 @@ function QuestionPage (props) {
         <Filler/>
             <Container style={{justifyContent: "center"}}>
                 <Row>
-                    <h1>Today's category is "{questions.category}"</h1>
+                    <h1 className='text-center'>Today's category is "{questions.category}"</h1>
                 </Row>
-                <Row>
-                    <h3>{questions.data[currentQuestion].question}</h3>
+                <Row style={{padding:30}}>
+                    <h3 className='text-center'>{questions.data[currentQuestion].question}</h3>
                 </Row>
-                <Row>
-                    <Button onClick={() => setOptionChosen("A")}>{questions.data[currentQuestion].optionA}</Button>
+                <Row style={{padding:30}}>
+                    <h5 className='text-center'>Question: {currentQuestion + 1}/10</h5>
                 </Row>
-                <Row>  
-                    <Button onClick={() => setOptionChosen("B")}>{questions.data[currentQuestion].optionB}</Button>
+                <div className='options'>
+                <Row style={{padding:20}}>
+                    <Button onClick={() => setOptionChosen("A") }>A: {questions.data[currentQuestion].optionA}</Button>
                 </Row>
-                <Row>        
-                    <Button onClick={() => setOptionChosen("C")}>{questions.data[currentQuestion].optionC}</Button>
+                <Row style={{padding:20}}>  
+                    <Button onClick={() => setOptionChosen("B")}>B: {questions.data[currentQuestion].optionB}</Button>
                 </Row>
-                <Row>    
-                    <Button onClick={() => setOptionChosen("D")}>{questions.data[currentQuestion].optionD}</Button>
+                <Row style={{padding:20}}>        
+                    <Button onClick={() => setOptionChosen("C")}>C: {questions.data[currentQuestion].optionC}</Button>
+                </Row>
+                <Row style={{padding:20}}>    
+                    <Button onClick={() => setOptionChosen("D")}>D: {questions.data[currentQuestion].optionD}</Button>
                 </Row>  
+                </div>
+                <Row className="text-center" style={{padding:10}}>
+                    {optionChosen === '' ? (<h5>(Unchosen)</h5>) :
+                    (<h5>(Your answer: {optionChosen})</h5>)}
+                </Row>
                 <Row>
-                    <div style={{ display: "flex", justifyContent: "center" }}>
+                    {currentQuestion === questions.data.length - 1 ? (<div style={{display: "flex", justifyContent: "center"}}>
+                        <Button variant="danger" onClick={handleClick}>Finish</Button>
+                    </div>) : (<div style={{display: "flex", justifyContent: "center"}}>
                         <Button variant="danger" onClick={handleClick}>Next</Button>
-                    </div>
+                    </div>)}
                 </Row>
                 <Row>
                     <div>

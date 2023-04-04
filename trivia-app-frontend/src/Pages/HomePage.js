@@ -1,17 +1,19 @@
 import Filler from '../Components/Filler'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Container, Row, Form, InputGroup, Button, Alert} from 'react-bootstrap';
-import {useRef} from "react";
-import {useState} from "react";
+import {useState, useRef, useContext} from "react";
 import logo from '../trivia-logo.svg';
+import {TriviaContext} from '../Components/Contexts';
 
-function HomePage(props){
+function HomePage(){
+    const {setGameState, setCurrentPlayerName} = useContext(TriviaContext);
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
     const nameRef = useRef();
 
     const handleClick = () => {
         let playerName = nameRef.current.value.trim();
+        setCurrentPlayerName(playerName);
         if (playerName !== ''){
             if (localStorage.getItem(playerName) !== null){ // existing player
                 const storedMapString = localStorage.getItem(playerName);
@@ -21,7 +23,7 @@ function HomePage(props){
                     storedMap.set("lastPlayed", new Date()) // update the login time
                     const mapObject = Object.fromEntries(storedMap.entries());
                     localStorage.setItem(playerName, JSON.stringify(mapObject));
-                    props.setGameState('question');
+                    setGameState('question');
                 } else {
                     // unable to play
                     setShowAlert(true);
@@ -32,13 +34,12 @@ function HomePage(props){
                 mapTobeStored.set("lastPlayed", new Date());
                 const mapObject = Object.fromEntries(mapTobeStored.entries());
                 localStorage.setItem(playerName, JSON.stringify(mapObject));
-                props.setGameState('question');
+                setGameState('question');
             }
         } else {
             setShowAlert(true);
             setAlertMessage('You must enter your name to play');
         }
-        
     }
 
     return (

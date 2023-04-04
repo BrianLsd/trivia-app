@@ -3,23 +3,23 @@ import {useState} from "react";
 import HomePage from './Pages/HomePage';
 import QuestionPage from './Pages/QuestionPage';
 import ResultPage from './Pages/ResultPage';
+import {TriviaContext} from './Components/Contexts';
 
 function Main() {
     const [gameState, setGameState] = useState('home');
+    const [currentPlayerName, setCurrentPlayerName] = useState('');
 
-    if (gameState === 'home'){
-        return (
-            <HomePage setGameState={setGameState}/>
-        )
-    } else if (gameState === 'question'){
-        return (
-            <QuestionPage setGameState={setGameState}/>
-        )
-    } else if (gameState === 'result'){
-        return (
-            <ResultPage setGameState={setGameState}/>
-        )
-    }
+    return (
+        <div>
+            <TriviaContext.Provider 
+            value={{gameState, setGameState, currentPlayerName, setCurrentPlayerName}}>
+                {gameState === 'home' && <HomePage/>}
+                {gameState === 'question' && <QuestionPage/>}
+                {gameState === 'result' && <ResultPage/>}
+            </TriviaContext.Provider>
+        </div>
+    );
+    
 }
 
 export default Main;
