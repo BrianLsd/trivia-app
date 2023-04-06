@@ -23,8 +23,6 @@ function QuestionPage () {
 
     const handleClick = () => {
         if (currentQuestion === questions.data.length - 1) {
-            // process user stats here -> store score, calcuate average, 
-            // how many times played, and number of 10/10
             const storedMapString = localStorage.getItem(currentPlayerName);
             const storedMap = new Map(Object.entries(JSON.parse(storedMapString)));
             storedMap.set("lastest score", score);
