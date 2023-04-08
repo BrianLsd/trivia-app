@@ -50,7 +50,7 @@ function HomePage(){
                 <h1 className="text-center rainbow">Welcome to Pure Trivia</h1>
             </Row>
             <Row>
-                <h3 className="text-center">"Let's see how many questions you can get right!"</h3>
+                <h3 className="text-center" style={{fontFamily:'Courier New'}}>"Let's see how many questions you can get right!"</h3>
             </Row>
             <Row>
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -87,7 +87,7 @@ function HomePage(){
                 <div>
                     <br/>
                     <br/>
-                    <h6 className="text-center">Version: 1.0 - 04/07/2023</h6>
+                    <h6 className="text-center">Version: 1.0 - 04/10/2023</h6>
                 </div>
             </Row>
         </Container>

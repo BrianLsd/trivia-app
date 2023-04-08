@@ -67,10 +67,10 @@ function QuestionPage () {
         <Filler/>
             <Container style={{justifyContent: "center"}}>
                 <Row>
-                    <h1 className='text-center'>Today's category is "{questions.category}"</h1>
+                    <h1 className='text-center rainbow'>Pure Trivia</h1>
                 </Row>
                 <Row style={{padding:30}}>
-                    <h3 className='text-center'>{questions.data[currentQuestion].question}</h3>
+                    <h3 className='text-center' style={{color:'Crimson'}}>{questions.data[currentQuestion].question}</h3>
                 </Row>
                 <Row style={{padding:30}}>
                     <h5 className='text-center'>Question: {currentQuestion + 1}/10</h5>
@@ -104,7 +104,7 @@ function QuestionPage () {
                     <div>
                         <br/>
                         <br/>
-                        <h6 className="text-center">Version: 1.0 - 04/07/2023</h6>
+                        <h6 className="text-center">Version: 1.0 - 04/10/2023</h6>
                     </div>
                 </Row>
             </Container>

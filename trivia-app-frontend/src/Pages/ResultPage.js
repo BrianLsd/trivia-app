@@ -28,14 +28,14 @@ function ResultPage () {
         <Filler/>
             <Container style={{justifyContent: "center"}}>
                 <Row className="justify-content-center" style={{padding:30}}>
-                <Card style={{ width: '40%', backgroundColor:'lightyellow', fontWeight:'bold', padding:30}}>
+                <Card style={{ width: '60%', backgroundColor:'lightyellow', fontWeight:'bold', padding:30}}>
                     <Card.Body>
-                        <Card.Title className='text-center' style={{padding:10}}>See you tomorrow!</Card.Title>
-                        <Card.Text className='text-center' style={{color:'purple'}}>◆ Name: {name}</Card.Text>
-                        <Card.Text className='text-center' style={{color:'purple'}}>◆ Your Score: {latestScore}/10</Card.Text>
-                        <Card.Text className='text-center' style={{color:'purple'}}>◆ Average Score: {averageScore}/10</Card.Text>
-                        <Card.Text className='text-center' style={{color:'purple'}}>◆ Times Played: {timesPlayed}</Card.Text>
-                        <Card.Text className='text-center' style={{color:'purple'}}>◆ Times of 10/10: {timesOfTen}</Card.Text>
+                        <Card.Title className='text-center' style={{padding:10, fontSize:30}}>See you tomorrow!</Card.Title>
+                        <Card.Text className='text-center' style={{color:'Tomato', fontSize:20}}>◆ Name: {name}</Card.Text>
+                        <Card.Text className='text-center' style={{color:'Tomato', fontSize:20}}>◆ Your Score: {latestScore}/10</Card.Text>
+                        <Card.Text className='text-center' style={{color:'Tomato', fontSize:20}}>◆ Average Score: {averageScore}/10</Card.Text>
+                        <Card.Text className='text-center' style={{color:'Tomato', fontSize:20}}>◆ Times Played: {timesPlayed}</Card.Text>
+                        <Card.Text className='text-center' style={{color:'Tomato', fontSize:20}}>◆ Times of 10/10: {timesOfTen}</Card.Text>
                     </Card.Body>
                 </Card>
                 </Row>
@@ -48,7 +48,7 @@ function ResultPage () {
                     <div>
                         <br/>
                         <br/>
-                        <h6 className="text-center">Version: 1.0 - 04/07/2023</h6>
+                        <h6 className="text-center">Version: 1.0 - 04/10/2023</h6>
                     </div>
                 </Row>
             </Container>
