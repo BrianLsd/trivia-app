@@ -63,7 +63,6 @@ function QuestionPage () {
             setCurrentQuestion(currentQuestion + 1);
             setOptionChosen('');
         }
-        console.log(score);
     }
 
     return (
