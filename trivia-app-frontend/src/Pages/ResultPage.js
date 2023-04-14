@@ -30,7 +30,7 @@ function ResultPage () {
         <Filler/>
             <Container style={{justifyContent: "center"}}>
                 <Row className="justify-content-center" style={{padding:30}}>
-                    <Card style={{ width: '70%', backgroundColor:'SeaShell', fontWeight:'bold', padding:30}}>
+                    <Card style={{ width: '100%', backgroundColor:'SeaShell', fontWeight:'bold', padding:30}}>
                         <Card.Body>
                             <Card.Title className='text-center' style={{padding:10, fontSize:30}}>Play Again Tomorrow~</Card.Title>
                             <Card.Text className='text-center' style={{color:'RoyalBlue', fontSize:20}}>◆ Name: {name}</Card.Text>
