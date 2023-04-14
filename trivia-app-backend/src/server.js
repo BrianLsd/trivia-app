@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename)
 const app = express();
 const port = 8000;
 
-const validateApiKey = (req, res, next) => { 
+const validateApiKey = (req, res, next) => { // API key: $2y$10$aXjoDQFYRdVbQeyyZz9yGejIalB9wePmPzHuODl6N5pGY2HSL7wA2 (for testing purposes)
     const apiKey = req.header('x-api-key');
     if (apiKey !== process.env.API_KEY){
         return res.status(401).json({message: 'Invalid API key'});
@@ -32,14 +32,13 @@ app.get('/api/questions', async (req, res) => { // tested with Postman
 
     const db = client.db('trivia');
     const questions = await db.collection('questions').find().toArray();
-    const randomQuestionNumbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
     const data = [];
-    for (let i = randomQuestionNumbers.length - 1; i > 0; i--){
+    for (let i = questions.length - 1; i > 0; i--){ // shuffle questions
         const j = Math.floor(Math.random() * (i + 1));
-        [randomQuestionNumbers[i], randomQuestionNumbers[j]] = [randomQuestionNumbers[j], randomQuestionNumbers[i]];
+        [questions[i], questions[j]] = [questions[j], questions[i]];
     }
 
-    for (let i of randomQuestionNumbers) {
+    for (let i = 0; i < 10; i++) {
         data.push(questions[i]);
     }
     res.json({data});

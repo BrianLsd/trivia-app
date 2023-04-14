@@ -1,6 +1,6 @@
 import Filler from '../Components/Filler'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Container, Row, Form, InputGroup, Button, Alert} from 'react-bootstrap';
+import {Container, Row, Col, Form, InputGroup, Button, Alert} from 'react-bootstrap';
 import {useState, useRef, useContext} from "react";
 import logo from '../trivia-logo.svg';
 import {TriviaContext} from '../Components/Contexts';
@@ -47,48 +47,61 @@ function HomePage(){
     <Filler/>
         <Container style={{justifyContent: "center"}}>
             <Row>
-                <h1 className="text-center rainbow">Welcome to Pure Trivia</h1>
+                <Col>
+                    <h1 className="text-center rainbow">Welcome to Pure Trivia</h1>
+                </Col>
             </Row>
             <Row>
-                <h3 className="text-center" style={{fontFamily:'Courier New'}}>"Let's see how many questions you can get right!"</h3>
+                <Col>
+                    <h3 className="text-center" style={{fontFamily:'Courier New'}}>"Let's see how many questions you can get right!"</h3>
+                </Col>
             </Row>
             <Row>
-                <div style={{ display: "flex", justifyContent: "center" }}>
-                    <img src={logo} className="logo" alt="logo" />
-                </div>
+                <Col>
+                    <div style={{ display: "flex", justifyContent: "center" }}>
+                        <img src={logo} className="logo" alt="logo" />
+                    </div>
+                </Col>
             </Row>
             <Row>
-                <div className="d-flex justify-content-center">
-                    <InputGroup className="mb-3" style={{ width: '30%'}}>
-                        <InputGroup.Text id="basic-addon1">Your Name</InputGroup.Text>
-                        <Form.Control
-                        placeholder="Name"
-                        aria-label="Name"
-                        aria-describedby="basic-addon1"
-                        ref={nameRef}
-                        />
-                    </InputGroup>
-                </div>
+                <Col>
+                    <div className="d-flex justify-content-center">
+                        <InputGroup className="mb-3" style={{ width: '35%'}}>
+                            <InputGroup.Text id="basic-addon1">Name</InputGroup.Text>
+                            <Form.Control
+                            aria-label="Name"
+                            aria-describedby="basic-addon1"
+                            ref={nameRef}
+                            />
+                        </InputGroup>
+                    </div>
+                </Col>
             </Row>
             <Row>
-                <div style={{ display: "flex", justifyContent: "center", paddingBottom: "20px"}}>
-                    <Button variant="danger" onClick={handleClick}>Gooo!</Button>
-                </div>
+                <Col>
+                    <div style={{ display: "flex", justifyContent: "center", paddingBottom: "20px"}}>
+                        <Button variant="danger" onClick={handleClick}>Gooo!</Button>
+                    </div>
+                </Col>
             </Row>
             <Row>
-                {showAlert && <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
-                <Alert.Heading>Oops!</Alert.Heading>
-                <p>
-                    {alertMessage}
-                </p>
-                </Alert>}
+                <Col>
+                    {showAlert && <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
+                    <Alert.Heading>Oops!</Alert.Heading>
+                    <p>
+                        {alertMessage}
+                    </p>
+                    </Alert>}
+                </Col>
             </Row>
             <Row>
-                <div>
-                    <br/>
-                    <br/>
-                    <h6 className="text-center">Version: 1.0 - 04/10/2023</h6>
-                </div>
+                <Col>
+                    <div>
+                        <br/>
+                        <br/>
+                        <h6 className="text-center">Version: 1.0 - 04/10/2023</h6>
+                    </div>
+                </Col>
             </Row>
         </Container>
     <div className='footer'>
