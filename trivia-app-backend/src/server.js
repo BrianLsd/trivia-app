@@ -17,7 +17,7 @@ const port = 8000;
 app.use(express.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, '../build')))
 
-const validateApiKey = (req, res, next) => { // API key: $2y$10$aXjoDQFYRdVbQeyyZz9yGejIalB9wePmPzHuODl6N5pGY2HSL7wA2 (for testing purposes)
+const validateApiKey = (req, res, next) => {
     const apiKey = req.header('x-api-key');
     if (apiKey !== process.env.API_KEY){
         return res.status(401).json({message: 'Invalid API key'});
